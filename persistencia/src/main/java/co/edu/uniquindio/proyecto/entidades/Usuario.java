@@ -14,19 +14,12 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
+
 public class Usuario extends Persona implements Serializable {
-
-
-
-
-    @Column(nullable = false, unique = true, length = 120)
-    private String email;
 
     @ElementCollection
     @Column(nullable = false)
     private Map<String,String> numTelefono;
-
-
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -34,14 +27,32 @@ public class Usuario extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
-    private List<Prestamo> prestamos;
+    private List<Compra> compras;
 
-    public Usuario(String codigo, String nombre, LocalDate fechaNacimiento, GeneroPersona genero, String email, Map<String, String> numTelefono, Ciudad ciudad) {
-        super(codigo, nombre, fechaNacimiento, genero);
-        this.email = email;
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<SubastaUsuario> subastaUsuarios;
+
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Producto> productosFavoritos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Producto> productos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Chat> chats;
+
+    public Usuario(String codigo, String nombre, String email,String password, Map<String, String> numTelefono, Ciudad ciudad) {
+        super(codigo, nombre, email, password);
+
         this.numTelefono = numTelefono;
         this.ciudad = ciudad;
     }
+
 
 
 }

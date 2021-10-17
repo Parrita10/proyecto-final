@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
-import co.edu.uniquindio.proyecto.entidades.GeneroPersona;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +34,7 @@ public class UsuarioTest {
         telefonos.put("casa", "12345678");
         telefonos.put("celular", "98765432");
 
-        Usuario usuario = new Usuario("123","Pepito",LocalDate.now(),GeneroPersona.MASCULINO,"pepe@email.com",telefonos, ciudad);
+        Usuario usuario = new Usuario("123","Pepito","pepe@email.com","123456",telefonos, ciudad);
 
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
 
@@ -71,8 +69,7 @@ public class UsuarioTest {
 
         Assertions.assertEquals("lorena_nuevo@email.com", usuarioBuscado.getEmail());
 
-
-
+        
  }
     @Test
     @Sql("classpath:usuarios.sql")
@@ -81,7 +78,6 @@ public class UsuarioTest {
 
         List<Usuario> usuarios = usuarioRepo.findAll();
         usuarios.forEach(usuario -> System.out.println(usuario));
-
 
 
     }
