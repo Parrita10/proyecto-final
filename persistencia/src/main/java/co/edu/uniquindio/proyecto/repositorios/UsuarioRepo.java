@@ -4,8 +4,8 @@ import co.edu.uniquindio.proyecto.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+//Este permite llamar los datos del archivo .sql
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario, String> {
-
 
 }

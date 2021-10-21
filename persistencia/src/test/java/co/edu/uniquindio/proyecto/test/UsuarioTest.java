@@ -26,6 +26,7 @@ public class UsuarioTest {
     private CiudadRepo ciudadRepo;
 
     @Test
+    @Sql("classpath:Archivos.sql")
     public void registrarTest(){
 
         Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
@@ -43,9 +44,8 @@ public class UsuarioTest {
     }
 
     @Test
-    @Sql("classpath:usuarios.sql")
+    @Sql("classpath:Archivos.sql")
     public void eliminarTest(){
-
 
         usuarioRepo.deleteById("123");
 
@@ -56,7 +56,7 @@ public class UsuarioTest {
     }
 
     @Test
-    @Sql("classpath:usuarios.sql")
+    @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
         Usuario guardado = usuarioRepo.findById("124").orElse(null);
@@ -68,13 +68,11 @@ public class UsuarioTest {
         Usuario usuarioBuscado = usuarioRepo.findById("124").orElse(null);
 
         Assertions.assertEquals("lorena_nuevo@email.com", usuarioBuscado.getEmail());
-
-        
  }
-    @Test
-    @Sql("classpath:usuarios.sql")
-    public void listarTest(){
 
+    @Test
+   @Sql("classpath:Archivos.sql")
+    public void listarTest(){
 
         List<Usuario> usuarios = usuarioRepo.findAll();
         usuarios.forEach(usuario -> System.out.println(usuario));
