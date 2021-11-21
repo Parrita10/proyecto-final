@@ -9,11 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -68,15 +72,63 @@ public class UsuarioTest {
         Usuario usuarioBuscado = usuarioRepo.findById("124").orElse(null);
 
         Assertions.assertEquals("lorena_nuevo@email.com", usuarioBuscado.getEmail());
- }
+    }
 
     @Test
-   @Sql("classpath:Archivos.sql")
+    @Sql("classpath:Archivos.sql")
     public void listarTest(){
 
         List<Usuario> usuarios = usuarioRepo.findAll();
         usuarios.forEach(usuario -> System.out.println(usuario));
+    }
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    //Buscamos usurarios por nombres
+    public void filtarNombreTest() {
+        List<Usuario> lista = usuarioRepo.findAllByNombreContains("ANDRES");
+
+        //Una forma de hacerlo
+        //lista.forEach( u -> System.out.println(u));
+
+        //Segunda forma de hacerlo
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+
+    //Buscamos usurarios por el Email
+    public void filtarEmailTest() {
+
+        Optional<Usuario> usuario =  usuarioRepo.findByEmail("santiago@email.com");
+
+        if(usuario.isPresent()){
+            System.out.println(usuario.get());
+        }else {
+        System.out.println("No existe ese correo");
+        }
+    }
 
 
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void paginarListaTest() {
+
+        Pageable paginador = PageRequest.of( 1, 2 );
+
+
+        Page<Usuario> lista = usuarioRepo.findAll(paginador);
+        System.out.println(lista.stream().collect(Collectors.toList()));
+    }
+
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void ordenarListaTest() {
+
+        List<Usuario> lista = usuarioRepo.findAll(Sort.by("nombre"));
+        System.out.println(lista);
     }
 }
+
