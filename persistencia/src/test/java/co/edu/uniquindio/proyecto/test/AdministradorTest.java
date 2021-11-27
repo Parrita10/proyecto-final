@@ -11,11 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @DataJpaTest
@@ -64,13 +66,37 @@ public class AdministradorTest {
         Assertions.assertEquals("lorena_nuevo@email.com", administradorBuscado.getEmail());
     }
 
+
     @Test
     @Sql("classpath:Archivos.sql")
     public void listarTest(){
 
         List<Administrador> administradores = administradorRepo.findAll();
         administradores.forEach(administrador -> System.out.println(administrador));
-
-
     }
+
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void ordenarListaTest() {
+
+       List<Administrador> lista = administradorRepo.findAll(Sort.by("nombre"));
+       System.out.println(lista);
+    }
+
+
+    //SE DEBE CORREGIR
+    //@Test
+    //@Sql("classpath:Archivos.sql")
+    //public void loguarseAdministradorTest() {
+
+        //Optional<Administrador> administrador =  AdministradorRepo.findByEmail("santiago@email.com");
+
+        //if(administrador.isPresent()){
+            //System.out.println(administrador.get());
+        //}else {
+            //System.out.println("No existe ese correo");
+        //}
+    //}
+
 }

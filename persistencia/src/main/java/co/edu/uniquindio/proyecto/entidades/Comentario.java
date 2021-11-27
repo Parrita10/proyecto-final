@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 
 //Se crea la clase Comentario y se le agrega implements Serializable
 public class Comentario implements Serializable {

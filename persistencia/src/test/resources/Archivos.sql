@@ -55,6 +55,12 @@ insert into administrador values ("1", "pepito@email.com", "PEPITO", "1234");
 insert into administrador values ("2", "alejito@email.com", "ALEJO", "12345");
 insert into administrador values ("3", "juanca@email.com", "JUAN", "123456");
 
+insert into producto_usuarios values ("1","123" );
+insert into producto_usuarios values ("2","124" );
+insert into producto_usuarios values ("3","125" );
+
+
+
 
 
 

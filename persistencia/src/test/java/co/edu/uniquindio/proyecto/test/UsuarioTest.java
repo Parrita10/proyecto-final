@@ -1,8 +1,10 @@
 package co.edu.uniquindio.proyecto.test;
 
+import co.edu.uniquindio.proyecto.dto.ProductoValido;
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,11 +39,7 @@ public class UsuarioTest {
 
         Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
 
-        Map<String, String> telefonos = new HashMap<>();
-        telefonos.put("casa", "12345678");
-        telefonos.put("celular", "98765432");
-
-        Usuario usuario = new Usuario("123","Pepito","pepe@email.com","123456",telefonos, ciudad);
+        Usuario usuario = new Usuario("123","Pepito","pepe@email.com","el pepe","123456", ciudad);
 
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
 
@@ -82,6 +82,10 @@ public class UsuarioTest {
         usuarios.forEach(usuario -> System.out.println(usuario));
     }
 
+
+
+
+
     @Test
     @Sql("classpath:Archivos.sql")
     //Buscamos usurarios por nombres
@@ -115,8 +119,7 @@ public class UsuarioTest {
     @Sql("classpath:Archivos.sql")
     public void paginarListaTest() {
 
-        Pageable paginador = PageRequest.of( 1, 2 );
-
+        Pageable paginador = PageRequest.of( 0, 2 );
 
         Page<Usuario> lista = usuarioRepo.findAll(paginador);
         System.out.println(lista.stream().collect(Collectors.toList()));
@@ -130,5 +133,59 @@ public class UsuarioTest {
         List<Usuario> lista = usuarioRepo.findAll(Sort.by("nombre"));
         System.out.println(lista);
     }
+
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void listarUsuariosCiudadTest() {
+
+        List<Usuario> usuarios = ciudadRepo.listarUsuarios( "Pereira");
+        usuarios.forEach(System.out::println);
+        Assertions.assertEquals( 2, usuarios.size());
+    }
+
+
+    //REVISAR --> CORREGIR EL ASSERTIONS
+//    @Test
+//    @Sql("classpath:Archivos.sql")
+//    public void listarUsuariosProductosTest() {
+//
+//        List<Object[]> respuesta = usuarioRepo.listarUsuariosYProductos( );
+//        respuesta.forEach(objeto -> System.out.println(objeto[0]+"----"+ objeto[1]));
+//        Assertions.assertEquals(4, respuesta.size());
+//    }
+
+
+    //REVISAR --> CORREGIR EL ASSERTIONS
+//    @Test
+//    @Sql("classpath:Archivos.sql")
+//    public void listarProductosYComentariosTest() {
+//
+//        List<Object[]> respuesta = ProductoRepo.listarProductosYComentarios();
+//        respuesta.forEach(objeto -> System.out.println(objeto[0]+"----"+ objeto[1]));
+//        Assertions.assertEquals(4, respuesta.size());
+//    }
+
+
+    //REVISAR
+    //@Test
+    //@Sql("classpath:Archivos.sql")
+    //public void listarUsuariosComentariosTest() {
+        //List<Usuario> usuarios = ProductoRepo.listarUsuariosComentarios(1);
+        //usuarios.forEach(System.out::println);
+    //}
+
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void listarProductosValidosTest() {
+
+        List<ProductoValido> productos = ProductoRepo.listarProductosValidos(LocalDateTime.now());
+        productos.forEach(System.out::println);
+    }
+
+
+
+
 }
 

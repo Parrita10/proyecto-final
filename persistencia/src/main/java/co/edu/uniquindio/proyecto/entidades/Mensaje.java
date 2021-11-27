@@ -25,7 +25,6 @@ public class Mensaje implements Serializable {
 
     //Indica que este es la llave primaria
     @Id
-
     // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
     @Column(length = 50)
 

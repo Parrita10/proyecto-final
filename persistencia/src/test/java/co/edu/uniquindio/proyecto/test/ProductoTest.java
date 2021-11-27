@@ -132,6 +132,7 @@ public class ProductoTest {
         productos.forEach(producto -> System.out.println(producto));
     }
 
+
     @Test
     @Sql("classpath:Archivos.sql")
     public void paginarListaTest() {
@@ -141,4 +142,23 @@ public class ProductoTest {
         Page<Producto> lista = productoRepo.findAll(paginador);
         System.out.println(lista.stream().collect(Collectors.toList()));
     }
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void obtenerNombreVendedorTest(){
+
+        String nombre = productoRepo.obtenerNombreVendedor("2");
+
+        Assertions.assertEquals( "SANTIAGO", nombre);
+    }
+
+
+    //REVISAR
+    //@Test
+    //@Sql("classpath:Archivos.sql")
+    //public void obtenerFavoritosUsuarioTest(){
+        //List<Producto> favoritos = usuarioRepo.obtenerProductosFavoritos("miguel@email.com");
+        //favoritos.forEach(System.out::println);
+        //Assertions.assertEquals( 1, favoritos.size());
+    //}
 }

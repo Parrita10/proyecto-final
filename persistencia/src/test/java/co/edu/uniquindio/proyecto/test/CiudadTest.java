@@ -79,11 +79,8 @@ public class CiudadTest {
     @Sql("classpath:Archivos.sql")
     public void listarTest(){
 
-
         List<Ciudad> ciudades = ciudadRepo.findAll();
         ciudades.forEach(ciudad -> System.out.println(ciudad));
-
-
 
     }
 

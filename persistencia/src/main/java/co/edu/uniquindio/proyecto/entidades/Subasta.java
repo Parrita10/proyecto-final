@@ -40,6 +40,7 @@ public class Subasta implements Serializable {
 
     //Aplicamos la relacion uno a muchos entre SubastaUsuario y Subasta
     @OneToMany(mappedBy = "subasta")
+    @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
 
 }

@@ -5,6 +5,8 @@ import co.edu.uniquindio.proyecto.entidades.Comentario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,8 +15,8 @@ import java.util.List;
 public interface ComentarioRepo extends JpaRepository<Comentario,String> {
 
     //FORMA NUMERO 1
-    @Query("select  c from Comentario c where c.calificacion > :calificacionMenor and c.calificacion < :calificacionMenor")
-    List<Comentario> listarComentariosRango1(int calificacionMenor, int calificacionMayor);
+    //@Query("select  c from Comentario c where c.calificacion > :calificacionMenor and c.calificacion < :calificacionMenor")
+    //List<Comentario> listarComentariosRango1(int calificacionMenor, int calificacionMayor);
 
     //FORMA NUMERO 2
     @Query("select  c from Comentario c where c.calificacion between :calificacionMenor and :calificacionMayor")

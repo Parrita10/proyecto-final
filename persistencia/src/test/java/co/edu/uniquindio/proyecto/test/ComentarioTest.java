@@ -77,11 +77,11 @@ public class ComentarioTest {
     @Sql("classpath:Archivos.sql")
     public void listarTest(){
 
-
         List<Comentario> comentarios = comentarioRepo.findAll();
         comentarios.forEach(Comentario -> System.out.println(comentarios));
-
     }
+
+
 
 
 }

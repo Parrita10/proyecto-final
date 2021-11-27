@@ -19,16 +19,15 @@ import java.util.Map;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString
 
 //Se crea la clase Producto y se le agrega implements Serializable
 public class Producto implements Serializable {
 
     //Indica que este es la llave primaria
     @Id
-
     // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
     @Column(length = 50)
-
     //Identificacion de Codigo (unica)
     private String codigo;
 
@@ -56,12 +55,13 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Double descuento;
 
+
     //Sirve para el tipo de dato Map<>
     @ElementCollection
-
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)
     private Map<String,String> imagen;
+
 
     //Aplicamos la relacion muchos a uno entre Producto y Ciudad
     @ManyToOne
@@ -73,24 +73,26 @@ public class Producto implements Serializable {
 
     //Aplicamos la relacion uno a muchos entre Producto y DetalleCompra
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
 
     //Aplicamos la relacion uno a muchos entre Comentario y Producto
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Comentario> comentarios;
 
     //Aplicamos la relacion uno a muchos entre Producto y Subasta
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Subasta> subastas;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
-    @ManyToMany
+    @ManyToMany(mappedBy = "productosFavoritos")
+    @ToString.Exclude
     private List<Usuario> usuarios;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Categoria
     @ManyToMany
+    @ToString.Exclude
     private List<Categoria> categorias;
-
 }
-
-
