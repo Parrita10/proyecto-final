@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
@@ -92,6 +93,18 @@ public class SeguridadBean implements Serializable {
         for(ProductoCarrito p : productosCarrito){
             subtotal+= p.getPrecio()*p.getUnidades();
         }
+    }
+    public int calcularMaximoUnidades(int indice){
+
+        Producto producto = null;
+        try {
+            producto = productoServicio.obtenerProducto(productosCarrito.get(indice).getId());
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return producto.getUnidades();
     }
 
     public void comprar(){

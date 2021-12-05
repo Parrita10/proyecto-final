@@ -45,7 +45,7 @@
                                 </td>
                                 <td>#{producto.precio}</td>
                                 <td>
-                                    <p:spinner value="#{producto.unidades}" min="1" >
+                                    <p:spinner value="#{producto.unidades}" min="1" max="#{seguridadBean.calcularMaximoUnidades(p.index)}" >
                                         <p:ajax listener="#{seguridadBean.actualizarSubtotal}"
                                                 update="form:subtotal-carrito"/>
                                     </p:spinner>
