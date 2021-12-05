@@ -4,9 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,18 +24,16 @@ import java.util.Map;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString
 
 //Se crea la clase Producto y se le agrega implements Serializable
 public class Producto implements Serializable {
 
     //Indica que este es la llave primaria
     @Id
-
-    // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
-    @Column(length = 50)
-
     //Identificacion de Codigo (unica)
-    private String codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codigo;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio y Length le da tamaño al codigo
     @Column(nullable = false, length = 80)
@@ -38,30 +41,40 @@ public class Producto implements Serializable {
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)
+    @PositiveOrZero
     private Integer unidades;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
+    @Lob
+    @NotBlank
     @Column(nullable = false)
     private String descripcion;
 
+    @Column(nullable = false)
+    private String nombrePublicacion;
+
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)
+    @Positive
     private Double precio;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)
+    @Future
     private LocalDate fechaLimite;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)
+    @PositiveOrZero
     private Double descuento;
 
-    //Sirve para el tipo de dato Map<>
-    @ElementCollection
 
+    @ElementCollection
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
-    @Column(nullable = false)
-    private Map<String,String> imagen;
+    private List<String> imagenes ;
+
+    @ElementCollection
+    private List<Categoria> categorias;
 
     //Aplicamos la relacion muchos a uno entre Producto y Ciudad
     @ManyToOne
@@ -69,28 +82,51 @@ public class Producto implements Serializable {
 
     //Aplicamos la relacion muchos a uno entre Producto y Usuario
     @ManyToOne
+
     private Usuario usuario;
 
     //Aplicamos la relacion uno a muchos entre Producto y DetalleCompra
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
 
     //Aplicamos la relacion uno a muchos entre Comentario y Producto
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Comentario> comentarios;
 
     //Aplicamos la relacion uno a muchos entre Producto y Subasta
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Subasta> subastas;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
     @ManyToMany
+    @ToString.Exclude
     private List<Usuario> usuarios;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Categoria
-    @ManyToMany
-    private List<Categoria> categorias;
 
+
+
+
+    public Producto( String nombre, Integer unidades, String descripcion, Double precio, LocalDate fechaLimite, Double descuento, Usuario usuario) {
+
+        this.nombre = nombre;
+        this.unidades = unidades;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.fechaLimite = fechaLimite;
+        this.descuento = descuento;
+        this.usuario = usuario;
+    }
+
+    public String getImagenPrincipal(){
+        if(imagenes !=null && !imagenes.isEmpty()){
+            return imagenes.get(0);
+        }
+        return "default.jfif";
+    }
 }
 
 

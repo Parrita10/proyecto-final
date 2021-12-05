@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString
 
 //Se crea la clase SubastaUsuario y se le agrega implements Serializable
 public class SubastaUsuario implements Serializable {
@@ -22,11 +23,9 @@ public class SubastaUsuario implements Serializable {
     //Indica que este es la llave primaria
     @Id
 
-    // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
-    @Column(length = 50)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Identificacion de Codigo (unica)
-    private String codigo;
+    private Integer codigo;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)

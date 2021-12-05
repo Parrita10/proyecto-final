@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString
 
 //Se crea la clase Compra y se le agrega implements Serializable
 public class Compra implements Serializable {
@@ -24,9 +25,8 @@ public class Compra implements Serializable {
     //Indica que este es la llave primaria
     @Id
 
-    // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
-    @Column(length = 50)
-    private String codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codigo;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacia
     @Column(nullable = false)
@@ -42,6 +42,7 @@ public class Compra implements Serializable {
 
     //Aplicamos la relacion uno a muchos entre Comentario y DetalleCompra
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<DetalleCompra> detallesCompras;
 
 

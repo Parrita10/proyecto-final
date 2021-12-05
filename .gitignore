@@ -10,3 +10,7 @@
 
 #Ignora archivos del sistema Mac
 .Ds_store
+
+/src
+
+web/src/main/webapp/uploads

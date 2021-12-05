@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +40,7 @@ public class ProductoTest {
     @Autowired
     private SubastaRepo subastaRepo;
 
-    @Autowired
-    private CategoriaRepo categoriaRepo;
+
 
     @Test
     @Sql("classpath:Archivos.sql")
@@ -56,22 +56,22 @@ public class ProductoTest {
 
         List<DetalleCompra> detalleCompras = new ArrayList<>();
 
-        detalleCompras.add(detalleCompraRepo.findById("1").orElse(null));
-        detalleCompras.add(detalleCompraRepo.findById("2").orElse(null));
-        detalleCompras.add(detalleCompraRepo.findById("3").orElse(null));
+        detalleCompras.add(detalleCompraRepo.findById(1).orElse(null));
+        detalleCompras.add(detalleCompraRepo.findById(2).orElse(null));
+        detalleCompras.add(detalleCompraRepo.findById(3).orElse(null));
 
 
         List<Comentario> comentarios = new ArrayList<>();
 
-        comentarios.add(comentarioRepo.findById("1").orElse(null));
-        comentarios.add(comentarioRepo.findById("2").orElse(null));
-        comentarios.add(comentarioRepo.findById("3").orElse(null));
+        comentarios.add(comentarioRepo.findById(1).orElse(null));
+        comentarios.add(comentarioRepo.findById(2).orElse(null));
+        comentarios.add(comentarioRepo.findById(3).orElse(null));
 
         List<Subasta> subastas = new ArrayList<>();
 
-        subastas.add(subastaRepo.findById("1").orElse(null));
-        subastas.add(subastaRepo.findById("2").orElse(null));
-        subastas.add(subastaRepo.findById("3").orElse(null));
+        subastas.add(subastaRepo.findById(1).orElse(null));
+        subastas.add(subastaRepo.findById(2).orElse(null));
+        subastas.add(subastaRepo.findById(3).orElse(null));
 
         List<Usuario> listaUsuarios = new ArrayList<>();
 
@@ -81,13 +81,11 @@ public class ProductoTest {
 
         List<Categoria> listaCategoria = new ArrayList<>();
 
-        listaCategoria.add(categoriaRepo.findById("1").orElse(null));
-        listaCategoria.add(categoriaRepo.findById("2").orElse(null));
-        listaCategoria.add(categoriaRepo.findById("3").orElse(null));
+
 
 
         LocalDate localDate = LocalDate.now();
-        Producto producto = new Producto("8","Locion", 5,"Mal olor", 4500.00, localDate, 7500.00, imagen, ciudad,usuario, detalleCompras, comentarios, subastas, listaUsuarios, listaCategoria  );
+        Producto producto = new Producto("Locion", 5,"Mal olor", 4500.00, localDate, 7500.00 ,usuario);
 
 
         Producto productoGuardado = productoRepo.save(producto);
@@ -98,9 +96,9 @@ public class ProductoTest {
     @Sql("classpath:Archivos.sql")
     public void eliminarTest(){
 
-        productoRepo.deleteById("1");
+        productoRepo.deleteById(1);
 
-        Producto productoBuscado = productoRepo.findById("1").orElse(null);
+        Producto productoBuscado = productoRepo.findById(1).orElse(null);
 
         Assertions.assertNull(productoBuscado);
     }
@@ -109,13 +107,13 @@ public class ProductoTest {
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
-        Producto guardado = productoRepo.findById("1").orElse(null);
+        Producto guardado = productoRepo.findById(1).orElse(null);
 
         guardado.setNombre("Celular");
         //guardar el usuario
         productoRepo.save(guardado);
 
-        Producto productoBuscado = productoRepo.findById("1").orElse(null);
+        Producto productoBuscado = productoRepo.findById(1).orElse(null);
 
         Assertions.assertEquals("Celular", productoBuscado.getNombre());
     }

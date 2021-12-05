@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 //Este permite llamar los datos del archivo .sql
 @Repository
-public interface ChatRepo extends JpaRepository  <Chat, String> {
+public interface ChatRepo extends JpaRepository  <Chat, Integer> {
 }

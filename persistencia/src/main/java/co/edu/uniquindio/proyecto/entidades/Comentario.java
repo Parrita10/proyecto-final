@@ -2,15 +2,16 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //sirve únicamente para indicarle a JPA que esa clase es una Entity
 @Entity
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 
 //Se crea la clase Comentario y se le agrega implements Serializable
 public class Comentario implements Serializable {
@@ -28,18 +30,20 @@ public class Comentario implements Serializable {
     //Indica que este es la llave primaria
     @Id
 
-    // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
-    @Column(length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     //Identificacion de Codigo (unica)
-    private String codigo;
+    private Integer codigo;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacia
     @Column(nullable = false)
+    @Lob
+    @NotBlank
     private String mensaje;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacia
-    @Column(nullable = false)
+
+    @Lob
     private String respuesta;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacia
@@ -53,16 +57,17 @@ public class Comentario implements Serializable {
     //Aplicamos la relacion muchos a uno entre Comentario y Producto
     @ManyToOne
     private Producto producto;
-
     //El numero debe ser positivo
-    @Positive
-
+    @PositiveOrZero
     //La calificacion maxima debe ser 5
     @Max(5)
-
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacia
     @Column(nullable = false)
     private Integer calificacion;
+
+    public String getFechaEstilo(){
+        return fecha_comentario.format(DateTimeFormatter.ISO_DATE);
+    }
 
 }
 

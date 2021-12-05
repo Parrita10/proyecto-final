@@ -35,13 +35,13 @@ public class CompraTest {
 
         List<DetalleCompra> detalleCompras = new ArrayList<>();
 
-        detalleCompras.add(detalleCompraRepo.findById("1").orElse(null));
-        detalleCompras.add(detalleCompraRepo.findById("2").orElse(null));
-        detalleCompras.add(detalleCompraRepo.findById("3").orElse(null));
+        detalleCompras.add(detalleCompraRepo.findById(1).orElse(null));
+        detalleCompras.add(detalleCompraRepo.findById(2).orElse(null));
+        detalleCompras.add(detalleCompraRepo.findById(3).orElse(null));
 
         Usuario usuario = usuarioRepo.findById("123").orElse(null);
         LocalDate localDate = LocalDate.now();
-        Compra compra= new Compra("1",localDate, "efectivo",usuario, detalleCompras);
+        Compra compra= new Compra(1,localDate, "efectivo",usuario, detalleCompras);
 
         Compra compraguardada = compraRepo.save(compra);
 
@@ -53,9 +53,9 @@ public class CompraTest {
     public void eliminarTest(){
 
 
-        compraRepo.deleteById("1");
+        compraRepo.deleteById(1);
 
-        Compra compraBuscado = compraRepo.findById("1").orElse(null);
+        Compra compraBuscado = compraRepo.findById(1).orElse(null);
 
         Assertions.assertNull(compraBuscado);
 
@@ -64,13 +64,13 @@ public class CompraTest {
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
-        Compra compraguardado = compraRepo.findById("1").orElse(null);
+        Compra compraguardado = compraRepo.findById(1).orElse(null);
 
         compraguardado.setMedioPago("targeta");
 
         compraRepo.save(compraguardado);
 
-        Compra compraBuscado = compraRepo.findById("1").orElse(null);
+        Compra compraBuscado = compraRepo.findById(1).orElse(null);
 
         Assertions.assertEquals("targeta", compraBuscado.getMedioPago());
 

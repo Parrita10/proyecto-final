@@ -2,9 +2,9 @@ insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
 insert into ciudad values (3,"Medellin");
 
-insert into usuario values ("123", "miguel@email.com", "MIGUEL", "1234", 1);
-insert into usuario values ("124", "andres@email.com", "ANDRES", "1234", 2);
-insert into usuario values ("125", "santiago@email.com", "SANTIAGO", "1234", 3);
+insert into usuario values ("123", "miguel@email.com", "MIGUEL", "1234","nose", 1);
+insert into usuario values ("124", "andres@email.com", "ANDRES", "1234","sldkjflksd", 2);
+insert into usuario values ("125", "santiago@email.com", "SANTIAGO", "1234","dsfsd", 3);
 
 insert into usuario_num_telefono values("123","7123258","casa");
 insert into usuario_num_telefono values("124","3135581225","trabajo");

@@ -41,9 +41,9 @@ public class AdministradorTest {
     @Sql("classpath:Archivos.sql")
     public void eliminarTest(){
 
-        administradorRepo.deleteById("1");
+        administradorRepo.deleteById(1);
 
-        Administrador administradorBuscado = administradorRepo.findById("1").orElse(null);
+        Administrador administradorBuscado = administradorRepo.findById(1).orElse(null);
 
         Assertions.assertNull(administradorBuscado);
 
@@ -53,13 +53,13 @@ public class AdministradorTest {
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
-        Administrador guardado = administradorRepo.findById("1").orElse(null);
+        Administrador guardado = administradorRepo.findById(1).orElse(null);
         //Modifica el administrador
         guardado.setEmail("lorena_nuevo@email.com");
         //guarda el administrador actualizado
         administradorRepo.save(guardado);
 
-        Administrador administradorBuscado = administradorRepo.findById("1").orElse(null);
+        Administrador administradorBuscado = administradorRepo.findById(1).orElse(null);
 
         Assertions.assertEquals("lorena_nuevo@email.com", administradorBuscado.getEmail());
     }

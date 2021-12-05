@@ -39,16 +39,16 @@ public class SubastaTest {
     @Sql("classpath:Archivos.sql")
     public void registrarTest(){
 
-        Producto producto = productoRepo.findById("1").orElse(null);
+        Producto producto = productoRepo.findById(1).orElse(null);
 
         List<SubastaUsuario> subastaUsuarios = new ArrayList<>();
 
-        subastaUsuarios.add(subastaUsuarioRepo.findById("1").orElse(null));
-        subastaUsuarios.add(subastaUsuarioRepo.findById("2").orElse(null));
-        subastaUsuarios.add(subastaUsuarioRepo.findById("3").orElse(null));
+        subastaUsuarios.add(subastaUsuarioRepo.findById(1).orElse(null));
+        subastaUsuarios.add(subastaUsuarioRepo.findById(2).orElse(null));
+        subastaUsuarios.add(subastaUsuarioRepo.findById(3).orElse(null));
 
         LocalDate localDate = LocalDate.now();
-        Subasta subasta = new Subasta("1",localDate,producto, subastaUsuarios);
+        Subasta subasta = new Subasta(1,localDate,producto, subastaUsuarios);
 
         Subasta subastaGuardado = subastaRepo.save(subasta);
 
@@ -59,9 +59,9 @@ public class SubastaTest {
     @Sql("classpath:Archivos.sql")
     public void eliminarTest(){
 
-        subastaRepo.deleteById("1");
+        subastaRepo.deleteById(1);
 
-        Subasta subastaBuscado = subastaRepo.findById("1").orElse(null);
+        Subasta subastaBuscado = subastaRepo.findById(1).orElse(null);
 
         Assertions.assertNull(subastaBuscado);
     }
@@ -70,14 +70,14 @@ public class SubastaTest {
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
-        Subasta guardado = subastaRepo.findById("3").orElse(null);
+        Subasta guardado = subastaRepo.findById(3).orElse(null);
 
         LocalDate localDate = LocalDate.now();
         guardado.setFechaLimite(localDate);
 
         subastaRepo.save(guardado);
 
-        Subasta subastaBuscado = subastaRepo.findById("3").orElse(null);
+        Subasta subastaBuscado = subastaRepo.findById(3).orElse(null);
 
         Assertions.assertEquals(localDate, subastaBuscado.getFechaLimite());
     }

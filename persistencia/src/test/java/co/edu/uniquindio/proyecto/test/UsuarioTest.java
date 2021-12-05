@@ -25,23 +25,23 @@ public class UsuarioTest {
     @Autowired
     private CiudadRepo ciudadRepo;
 
-    @Test
-    @Sql("classpath:Archivos.sql")
-    public void registrarTest(){
-
-        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
-
-        Map<String, String> telefonos = new HashMap<>();
-        telefonos.put("casa", "12345678");
-        telefonos.put("celular", "98765432");
-
-        Usuario usuario = new Usuario("123","Pepito","pepe@email.com","123456",telefonos, ciudad);
-
-        Usuario usuarioGuardado = usuarioRepo.save(usuario);
-
-        Assertions.assertNotNull(usuarioGuardado);
-
-    }
+//    @Test
+//    @Sql("classpath:Archivos.sql")
+//    public void registrarTest(){
+//
+//        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
+//
+//        Map<String, String> telefonos = new HashMap<>();
+//        telefonos.put("casa", "12345678");
+//        telefonos.put("celular", "98765432");
+//
+//        Usuario usuario = new Usuario("123","Pepito","pepe@email.com","123456",telefonos, ciudad);
+//
+//        Usuario usuarioGuardado = usuarioRepo.save(usuario);
+//
+//        Assertions.assertNotNull(usuarioGuardado);
+//
+//    }
 
     @Test
     @Sql("classpath:Archivos.sql")

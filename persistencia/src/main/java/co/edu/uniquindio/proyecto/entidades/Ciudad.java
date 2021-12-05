@@ -38,7 +38,6 @@ public class Ciudad implements Serializable {
 
     //Aplicamos la relacion uno a muchos entre Ciudad y usuarios
     @OneToMany(mappedBy = "ciudad")
-
     //Lo exluye del metodo toString
     @ToString.Exclude
     private List<Usuario> usuarios;

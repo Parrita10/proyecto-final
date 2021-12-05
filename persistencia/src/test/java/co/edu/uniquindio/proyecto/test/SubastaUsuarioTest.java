@@ -40,10 +40,10 @@ public class SubastaUsuarioTest {
 
         Usuario usuario = usuarioRepo.findById("123").orElse(null);
 
-        Subasta subasta = subastaRepo.findById("1").orElse(null);
+        Subasta subasta = subastaRepo.findById(1).orElse(null);
 
         LocalDate localDate = LocalDate.now();
-        SubastaUsuario subastaUsuario = new SubastaUsuario("123", 50000.00, localDate,usuario,subasta );
+        SubastaUsuario subastaUsuario = new SubastaUsuario(123, 50000.00, localDate,usuario,subasta );
 
         SubastaUsuario subastaUsuarioGuardado = subastaUsuarioRepo.save(subastaUsuario);
 
@@ -54,9 +54,9 @@ public class SubastaUsuarioTest {
     @Sql("classpath:Archivos.sql")
     public void eliminarTest(){
 
-        subastaUsuarioRepo.deleteById("1");
+        subastaUsuarioRepo.deleteById(1);
 
-        SubastaUsuario subastaUsuarioBuscado = subastaUsuarioRepo.findById("1").orElse(null);
+        SubastaUsuario subastaUsuarioBuscado = subastaUsuarioRepo.findById(1).orElse(null);
 
         Assertions.assertNull(subastaUsuarioBuscado);
     }

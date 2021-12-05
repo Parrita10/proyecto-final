@@ -37,10 +37,10 @@ public class ComentarioTest {
 
 
         Usuario usuario = usuarioRepo.findById("1").orElse(null);
-        Producto producto = productoRepo.findById("1").orElse(null);
+        Producto producto = productoRepo.findById(1).orElse(null);
 
         LocalDate localDate = LocalDate.now();
-        Comentario comentario= new Comentario("1", "El producto esta malo", "Lo lamento",localDate, usuario,producto,1);
+        Comentario comentario= new Comentario(1, "El producto esta malo", "Lo lamento",localDate, usuario,producto,1);
 
         Comentario comentarioGuardado = comentarioRepo.save(comentario);
 
@@ -51,9 +51,9 @@ public class ComentarioTest {
     public void eliminarTest(){
 
 
-        comentarioRepo.deleteById("1");
+        comentarioRepo.deleteById(1);
 
-        Comentario comentarioBuscado = comentarioRepo.findById("1").orElse(null);
+        Comentario comentarioBuscado = comentarioRepo.findById(1).orElse(null);
 
         Assertions.assertNull(comentarioBuscado);
 
@@ -62,13 +62,13 @@ public class ComentarioTest {
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
-        Comentario comentarioguardado = comentarioRepo.findById("1").orElse(null);
+        Comentario comentarioguardado = comentarioRepo.findById(1).orElse(null);
 
         comentarioguardado.setCalificacion(2);
 
         comentarioRepo.save(comentarioguardado);
 
-        Comentario comentarioBuscado = comentarioRepo.findById("1").orElse(null);
+        Comentario comentarioBuscado = comentarioRepo.findById(1).orElse(null);
 
         Assertions.assertEquals(2, comentarioBuscado.getCalificacion());
 

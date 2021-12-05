@@ -36,10 +36,10 @@ public class MensajeTest {
     @Sql("classpath:Archivos.sql")
     public void registrarTest(){
 
-        Chat chat = chatRepo.findById("1").orElse(null);
+        Chat chat = chatRepo.findById(1).orElse(null);
 
         LocalDateTime localDateTime = LocalDateTime.now();
-        Mensaje mensaje = new Mensaje("21","Hola", "Arias", localDateTime, chat );
+        Mensaje mensaje = new Mensaje(21,"Hola", "Arias", localDateTime, chat );
 
         Mensaje mensajeGuardado = mensajeRepo.save(mensaje);
 
@@ -50,9 +50,9 @@ public class MensajeTest {
     @Sql("classpath:Archivos.sql")
     public void eliminarTest(){
 
-        mensajeRepo.deleteById("1");
+        mensajeRepo.deleteById(1);
 
-        Mensaje mensajeBuscado = mensajeRepo.findById("1").orElse(null);
+        Mensaje mensajeBuscado = mensajeRepo.findById(1).orElse(null);
 
         Assertions.assertNull(mensajeBuscado);
     }
@@ -61,13 +61,13 @@ public class MensajeTest {
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
 
-        Mensaje guardado = mensajeRepo.findById("1").orElse(null);
+        Mensaje guardado = mensajeRepo.findById(1).orElse(null);
         //Modificamos el nuevo mensaje
         guardado.setMensaje("Hola crack");
         //Guardamos el mensaje
         mensajeRepo.save(guardado);
 
-        Mensaje mensajeBuscado= mensajeRepo.findById("1").orElse(null);
+        Mensaje mensajeBuscado= mensajeRepo.findById(1).orElse(null);
 
         Assertions.assertEquals("Hola crack", mensajeBuscado.getMensaje());
     }

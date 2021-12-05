@@ -34,11 +34,11 @@ public class ChatTest {
 
         List<Mensaje> Listmensajes = new ArrayList<>();
 
-        Listmensajes.add(mensajeRepo.findById("1").orElse(null));
-        Listmensajes.add(mensajeRepo.findById("2").orElse(null));
-        Listmensajes.add(mensajeRepo.findById("3").orElse(null));
+        Listmensajes.add(mensajeRepo.findById(1).orElse(null));
+        Listmensajes.add(mensajeRepo.findById(2).orElse(null));
+        Listmensajes.add(mensajeRepo.findById(3).orElse(null));
 
-        Chat chat = new Chat("1",Listmensajes, usuario);
+        Chat chat = new Chat(1,Listmensajes, usuario);
         Chat chatGuardado = chatRepo.save(chat);
 
         Assertions.assertNotNull(chatGuardado);
@@ -50,9 +50,9 @@ public class ChatTest {
     public void eliminarTest(){
 
 
-        chatRepo.deleteById("1");
+        chatRepo.deleteById(1);
 
-        Chat chatBuscado = chatRepo.findById("1").orElse(null);
+        Chat chatBuscado = chatRepo.findById(1).orElse(null);
 
         Assertions.assertNull(chatBuscado);
 
@@ -61,15 +61,15 @@ public class ChatTest {
     @Test
     @Sql("classpath:Archivos.sql")
     public void actualizarTest(){
-        Chat chat = chatRepo.findById("1").orElse(null);
+        Chat chat = chatRepo.findById(1).orElse(null);
 
-        chat.setCodigo("3");
+        chat.setCodigo(3);
 
         chatRepo.save(chat);
 
-        Chat chatBuscada = chatRepo.findById("1").orElse(null);
+        Chat chatBuscada = chatRepo.findById(1).orElse(null);
 
-        Assertions.assertEquals("3", chatBuscada.getCodigo());
+        Assertions.assertEquals(3, chatBuscada.getCodigo());
 
 
     }

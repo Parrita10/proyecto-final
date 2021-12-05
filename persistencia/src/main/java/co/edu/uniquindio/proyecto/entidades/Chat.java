@@ -23,11 +23,10 @@ public class Chat implements Serializable {
     //Indica que este es la llave primaria
     @Id
 
-    // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
-    @Column(length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     //Identificacion de Chat (unica)
-    private String codigo;
+    private Integer codigo;
 
     //Aplicamos la relacion uno a muchos entre chat y mensajes
     @OneToMany(mappedBy = "chat")

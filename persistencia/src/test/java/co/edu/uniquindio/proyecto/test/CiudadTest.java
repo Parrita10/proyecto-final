@@ -43,9 +43,9 @@ public class CiudadTest {
 
         List<Producto> listaProductos = new ArrayList<>();
 
-        listaProductos.add(productoRepo.findById("1").orElse(null));
-        listaProductos.add(productoRepo.findById("2").orElse(null));
-        listaProductos.add(productoRepo.findById("3").orElse(null));
+        listaProductos.add(productoRepo.findById(1).orElse(null));
+        listaProductos.add(productoRepo.findById(2).orElse(null));
+        listaProductos.add(productoRepo.findById(3).orElse(null));
 
 
 

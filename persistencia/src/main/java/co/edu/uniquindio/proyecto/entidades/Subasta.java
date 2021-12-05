@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.io.Serializable;
 import java.security.PrivateKey;
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString
 
 //Se crea la clase Subasta y se le agrega implements Serializable
 public class Subasta implements Serializable {
@@ -24,14 +26,14 @@ public class Subasta implements Serializable {
     //Indica que este es la llave primaria
     @Id
 
-    // Column ayuda a definir anotaciones en los atributos. Length le da tamaño al codigo
-    @Column(length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     //Identificacion de Codigo (unica)
-    private String codigo;
+    private Integer codigo;
 
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     @Column(nullable = false)
+    @Future
     private LocalDate fechaLimite;
 
     //Aplicamos la relacion muchos a uno entre Producto y Subasta
@@ -40,6 +42,7 @@ public class Subasta implements Serializable {
 
     //Aplicamos la relacion uno a muchos entre SubastaUsuario y Subasta
     @OneToMany(mappedBy = "subasta")
+    @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
 
 }

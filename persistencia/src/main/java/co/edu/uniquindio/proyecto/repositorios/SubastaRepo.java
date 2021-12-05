@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 //Este permite llamar los datos del archivo .sql
 @Repository
-public interface SubastaRepo extends JpaRepository<Subasta, String> {
+public interface SubastaRepo extends JpaRepository<Subasta, Integer> {
 }
