@@ -69,12 +69,14 @@ public class Producto implements Serializable {
     private Double descuento;
 
 
+
     @ElementCollection
     // Column ayuda a definir anotaciones en los atributos. No puede ir vacio
     private List<String> imagenes ;
 
     @ElementCollection
     private List<Categoria> categorias;
+
 
     //Aplicamos la relacion muchos a uno entre Producto y Ciudad
     @ManyToOne
@@ -101,11 +103,11 @@ public class Producto implements Serializable {
     private List<Subasta> subastas;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
-    @ManyToMany
+    @ManyToMany(mappedBy = "productosFavoritos")
     @ToString.Exclude
     private List<Usuario> usuarios;
 
-    //Aplicamos la relacion muchos a muchos entre Producto y Categoria
+
 
 
 
@@ -128,5 +130,6 @@ public class Producto implements Serializable {
         return "default.jfif";
     }
 }
+
 
 

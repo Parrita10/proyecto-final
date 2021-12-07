@@ -6,14 +6,21 @@ import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio{
+    private final UsuarioRepo usuarioRepo;
 
-    @Autowired
-    private UsuarioRepo usuarioRepo;
+
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
+        this.usuarioRepo = usuarioRepo;
+
+    }
+
 
     @Override
     public Usuario registrarUsuario(Usuario u) throws Exception {
@@ -91,8 +98,8 @@ public class UsuarioServicioImpl implements UsuarioServicio{
        return usuarioRepo.findByEmailAndPassword(email,password).orElseThrow( ()-> new Exception("Los datos de autenticacion son incorrectos"));
 
 
-
     }
+
 
 
 }

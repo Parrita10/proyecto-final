@@ -28,3 +28,20 @@ public class UsuarioServicioTest {
     }
 
 }
+
+//    @Autowired
+//    private UsuarioServicio usuarioServicio;
+//
+//    @Test
+//    public void registrarTest(){
+//        Usuario u = new Usuario("123","pepe","pepe@email.com","1234","pepito12",null);
+//        try {
+//            usuarioServicio.registrarUsuario(u);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+
+

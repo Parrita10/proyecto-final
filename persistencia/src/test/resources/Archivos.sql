@@ -2,9 +2,16 @@ insert into ciudad values (1,"Armenia");
 insert into ciudad values (2,"Pereira");
 insert into ciudad values (3,"Medellin");
 
+<<<<<<< HEAD
 insert into usuario values ("123", "miguel@email.com", "MIGUEL", "1234","nose", 1);
 insert into usuario values ("124", "andres@email.com", "ANDRES", "1234","sldkjflksd", 2);
 insert into usuario values ("125", "santiago@email.com", "SANTIAGO", "1234","dsfsd", 3);
+=======
+insert into usuario values ("123", "miguel@email.com", "MIGUEL", "1234", 1);
+insert into usuario values ("124", "andres@email.com", "ANDRES", "1234", 2);
+insert into usuario values ("125", "santiago@email.com", "SANTIAGO", "1234", 3);
+insert into usuario values ("126", "andresNuevo@email.com", "JUAN ANDRES", "1234", 2);
+>>>>>>> cb03e369f40e61577c0e9fe26048863e1d11e99b
 
 insert into usuario_num_telefono values("123","7123258","casa");
 insert into usuario_num_telefono values("124","3135581225","trabajo");
@@ -53,6 +60,12 @@ insert  into subasta_usuario values ("3","2021/09/27",546780.00,"2","123");
 insert into administrador values ("1", "pepito@email.com", "PEPITO", "1234");
 insert into administrador values ("2", "alejito@email.com", "ALEJO", "12345");
 insert into administrador values ("3", "juanca@email.com", "JUAN", "123456");
+
+insert into producto_usuarios values ("1","123" );
+insert into producto_usuarios values ("2","124" );
+insert into producto_usuarios values ("3","125" );
+
+
 
 
 

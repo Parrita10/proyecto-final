@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -127,4 +131,32 @@ public class ProductoTest {
     }
 
 
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void paginarListaTest() {
+
+        Pageable paginador = PageRequest.of( 0, 2 );
+
+        Page<Producto> lista = productoRepo.findAll(paginador);
+        System.out.println(lista.stream().collect(Collectors.toList()));
+    }
+
+    @Test
+    @Sql("classpath:Archivos.sql")
+    public void obtenerNombreVendedorTest(){
+
+        String nombre = productoRepo.obtenerNombreVendedor("2");
+
+        Assertions.assertEquals( "SANTIAGO", nombre);
+    }
+
+
+    //REVISAR
+    //@Test
+    //@Sql("classpath:Archivos.sql")
+    //public void obtenerFavoritosUsuarioTest(){
+        //List<Producto> favoritos = usuarioRepo.obtenerProductosFavoritos("miguel@email.com");
+        //favoritos.forEach(System.out::println);
+        //Assertions.assertEquals( 1, favoritos.size());
+    //}
 }

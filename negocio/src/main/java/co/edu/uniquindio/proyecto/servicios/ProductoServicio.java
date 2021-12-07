@@ -1,10 +1,18 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+
+import co.edu.uniquindio.proyecto.entidades.Categoria;
+import co.edu.uniquindio.proyecto.entidades.Compra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
+
+
 import java.util.List;
 
 public interface ProductoServicio {
@@ -13,15 +21,23 @@ public interface ProductoServicio {
 
     void actualizarProducto(Producto producto)throws Exception;
 
+
     void eliminarProducto(Integer codigo) throws Exception;
 
     Producto obtenerProducto(Integer codigo) throws Exception;
 
-    List<Producto> listarProductos(Categoria categoria);
+
 
     List<Producto> listarTodosProductos();
 
     void comentarProducto(Comentario comentario) throws Exception;
+
+
+
+    List<Producto> listarProductos(Categoria categoria);
+
+    void comentarProducto(String mensaje, Integer calificacion, Usuario usuario, Producto producto) throws Exception;
+
 
     void guadarProductoEnFavoritos(Producto producto, Usuario usuario) throws Exception;
 
@@ -33,6 +49,7 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos(String codigoUsuario) throws Exception;
 
+
     List<Categoria> listarCategoria();
 
     Categoria obtenerCategoria(String categoria) throws Exception;
@@ -40,6 +57,7 @@ public interface ProductoServicio {
     Integer obtenerPromedioCalificaciones(Integer codigo);
 
     Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago) throws Exception;
+
 
 
 }

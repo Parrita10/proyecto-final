@@ -15,7 +15,9 @@ public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     Optional<Ciudad> findByNombre(String nombreCiudad);
 
-    @Query("select u from Ciudad c join c.usuarios u where c.nombre = :nombre")
+
+    //Solicitamos la informacion de una lista de una entidad, es necesario hacer el Join
+    @Query("select u from Ciudad c join  c.usuarios u where c.nombre = :nombre")
     List<Usuario> listarUsuarios(String nombre);
 
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
+
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
@@ -17,10 +18,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductoServicioImpl implements ProductoServicio{
+public class ProductoServicioImpl implements ProductoServicio {
+
 
     @Autowired
     private ProductoRepo productoRepo;
+
 
     @Autowired
     private ComentarioRepo comentarioRepo;
@@ -30,6 +33,7 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Autowired
     private DetalleCompraRepo detalleCompraRepo;
+
 
     @Override
     public Producto publicarProducto(Producto p) throws Exception {
@@ -49,6 +53,7 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public void eliminarProducto(Integer codigo) throws Exception {
 
+
         Optional<Producto> producto = productoRepo.findById(codigo);
 
         if(producto.isEmpty()){
@@ -59,14 +64,17 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     }
 
+
     @Override
     public Producto obtenerProducto(Integer codigo) throws Exception {
+
 
         return productoRepo.findById(codigo).orElseThrow( ()-> new Exception("El producto no existe"));
     }
 
     @Override
     public List<Producto> listarProductos(Categoria categoria) {
+
 
         return productoRepo.listarPorCategoria(categoria);
     }
@@ -80,6 +88,12 @@ public class ProductoServicioImpl implements ProductoServicio{
     public void comentarProducto(Comentario comentario) throws Exception {
         comentario.setFecha_comentario(LocalDate.now());
         comentarioRepo.save(comentario);
+
+    }
+
+    @Override
+    public void comentarProducto(String mensaje, Integer calificacion, Usuario usuario, Producto producto) throws Exception {
+
 
     }
 
@@ -100,13 +114,17 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public List<Producto> buscarProductos(String nombreProducto, String[] filtros) {
+
         return productoRepo.buscarProductoNombre(nombreProducto);
+
+
     }
 
     @Override
     public List<Producto> listarProductos(String codigoUsuario) throws Exception {
         return null;
     }
+
 
     @Override
     public List<Categoria> listarCategoria() {
@@ -149,4 +167,5 @@ public class ProductoServicioImpl implements ProductoServicio{
         }
 
     }
+
 }

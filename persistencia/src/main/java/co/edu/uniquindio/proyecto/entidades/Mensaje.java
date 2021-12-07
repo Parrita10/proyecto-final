@@ -23,7 +23,6 @@ public class Mensaje implements Serializable {
 
     //Indica que este es la llave primaria
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     //Identificacion de Codigo (unica)
