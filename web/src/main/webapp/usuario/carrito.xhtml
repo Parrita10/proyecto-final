@@ -14,6 +14,7 @@
         <div class="row w-100">
             <div class="col-lg-12 col-md-12 col-12">
                 <h:form id="form">
+
                     <h1>Carrito de compra</h1>
                     <p class="mb-5 text-center">
                         <i class="text-info font-weight-bold">#{seguridadBean.productosCarrito.size()}</i> productos en el carrito
@@ -63,7 +64,9 @@
                         </p:repeat>
 
                         </tbody>
+
                     </table>
+
                     <div class="text-end">
                         <h4>Subtotal:</h4>
                         <h1 jsf:id="subtotal-carrito">#{seguridadBean.subtotal}</h1>
@@ -71,18 +74,24 @@
                 </h:form>
             </div>
         </div>
-<!--        <div class="row mt-4 d-flex align-items-start">-->
-<!--            <p:outputLabel value="Medio de pago:" for="medioPago"/>-->
-<!--            <p:selectOneMenu id="medioPago" value="#{usuarioBean.usuario.ciudad}" converter="#{ciudadConverter}">-->
-<!--                <f:selectItem itemLabel="Seleccione un medio de pago" noSelectionOption="true"/>-->
-<!--                <f:selectItems value="#{usuarioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}"/>-->
-<!--            </p:selectOneMenu>-->
-<!--            <p:message for="medioPago"/>-->
-<!--        </div>-->
 
         <div class="row mt-4 d-flex align-items-center">
 
             <h:form styleClass="text-center">
+                <div class="col-md-4">
+                    <h:panelGrid columns="3" cellpadding="1">
+                    <p:outputLabel value="Medios de pago:" for="medioPago" />
+                    <p:selectOneMenu id="medioPago" value="#{seguridadBean.medioPago}" >
+                        <f:selectItem itemLabel="Seleccione un medio de pago" noSelectionOption="true"/>
+                        <f:selectItem itemValue="Efectivo" itemLabel="Efectivo"/>
+                        <f:selectItem itemValue="Tarjeta" itemLabel="Tarjeta"/>
+                        <f:selectItem itemValue="Pse" itemLabel="Pse"/>
+                        <f:selectItem itemValue="Efecty" itemLabel="Efecty"/>
+                    </p:selectOneMenu>
+                    <p:message for="medioPago"/>
+                    </h:panelGrid>
+
+                </div>
                 <p:commandButton value="Comprar" update="@form" icon="pi pi-check" style="font-size: 20px" action="#{seguridadBean.comprar}"/>
                 <p:growl for="compra-msj" showDetail="true"/>
             </h:form>

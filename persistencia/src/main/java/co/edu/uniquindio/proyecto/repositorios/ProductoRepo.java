@@ -61,6 +61,9 @@ public interface ProductoRepo extends JpaRepository <Producto, Integer> {
     @Query("select p from Producto p where p.comentarios is empty ")
     List<Producto> obtenerProductosSinComentarios();
 
+    @Query("select p from Producto p where p.usuario.codigo = :codigo")
+    List<Producto> obtenerProductoCodigoU(String codigo);
+
     List<Producto> findByNombreContains(String nombre);
 
     @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%') ")

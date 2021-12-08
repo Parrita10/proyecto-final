@@ -52,6 +52,7 @@ public interface ProductoServicio {
 
     List<Categoria> listarCategoria();
 
+
     Categoria obtenerCategoria(String categoria) throws Exception;
 
     Integer obtenerPromedioCalificaciones(Integer codigo);

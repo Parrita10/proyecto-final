@@ -122,7 +122,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductos(String codigoUsuario) throws Exception {
-        return null;
+        return productoRepo.obtenerProductoCodigoU(codigoUsuario);
     }
 
 
@@ -130,6 +130,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<Categoria> listarCategoria() {
         return Arrays.asList(Categoria.values());
     }
+
 
     @Override
     public Categoria obtenerCategoria(String categoria) throws Exception {
@@ -145,6 +146,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     public Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago) throws Exception {
         try {
             Compra c = new Compra();
+            Producto producto = new Producto();
             c.setFechaCompra(LocalDate.now(ZoneId.of("America/Bogota")));
             c.setUsuario(usuario);
             c.setMedioPago(medioPago);
@@ -158,6 +160,8 @@ public class ProductoServicioImpl implements ProductoServicio {
                 dc.setPrecioProducto(p.getPrecio());
                 dc.setUnidades(p.getUnidades());
                 dc.setProducto(productoRepo.findById(p.getId()).get());
+                producto = productoRepo.findById(p.getId()).get();
+                producto.setUnidades(producto.getUnidades()-p.getUnidades());
 
                 detalleCompraRepo.save(dc);
             }

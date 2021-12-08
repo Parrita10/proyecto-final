@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
@@ -33,6 +34,10 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private Usuario usuarioSesion;
 
+
+    @Setter @Getter
+    private String medioPago ;
+
     @Autowired
     private ProductoServicio productoServicio;
 
@@ -48,6 +53,7 @@ public class SeguridadBean implements Serializable {
     public void inicializar(){
         this.subtotal = 0.0;
         this.productosCarrito = new ArrayList<>();
+
     }
 
     public String iniciarSesion(){
@@ -110,7 +116,8 @@ public class SeguridadBean implements Serializable {
     public void comprar(){
         if(usuarioSesion!=null && !productosCarrito.isEmpty()) {
             try {
-                productoServicio.comprarProductos(usuarioSesion, productosCarrito,"PSE");
+                System.out.println(medioPago);
+                productoServicio.comprarProductos(usuarioSesion, productosCarrito, medioPago);
                 productosCarrito.clear();
                 subtotal=0.0;
                 FacesMessage fm=new FacesMessage(FacesMessage.SEVERITY_INFO,"Alerta","La compra se realizo correctamente");

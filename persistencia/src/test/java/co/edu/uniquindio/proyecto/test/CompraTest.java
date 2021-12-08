@@ -66,7 +66,7 @@ public class CompraTest {
 
         Compra compraguardado = compraRepo.findById(1).orElse(null);
 
-        compraguardado.setMedioPago("targeta");
+        compraguardado.setMedioPago("efectivo");
 
         compraRepo.save(compraguardado);
 
