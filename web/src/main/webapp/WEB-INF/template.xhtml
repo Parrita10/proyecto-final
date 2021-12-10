@@ -75,6 +75,12 @@
                                 Carrito
                             </a>
                         </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/gestionUsuarios.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-user bi d-block mx-auto mb-1 icon-menu"></i>
+                                Gestion usuarios
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -120,11 +126,37 @@
             />
             <p:message for="password_login" />
         </h:panelGrid>
-        <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}"
+        <div align="center">
+        <p:commandButton value="Iniciar Sesión Usuario" action="#{seguridadBean.iniciarSesion}"
                          styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
         <p:growl for="login-bean" showDetail="true" />
+
+        </div>
+        <div align="center">
+            <p:commandButton value="Iniciar Sesión Administrador" action="#{seguridadBean.iniciarSesionAdmin}"
+                             styleClass="m-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+            <p:growl for="login-admin" showDetail="true" />
+        </div>
+        <div align="center">
+            <p:commandButton value="Recuperar Contrasena" styleClass="btn btn-primary me-2" onclick="PF('rec').show()" icon="pi pi-sign-in"/>
+        </div>
     </h:form>
     </p:dialog>
+
+    <p:dialog header="Recuperar Contrasena" showEffect="fade" widgetVar="rec" modal="true">
+        <h:form >
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="email_rec" value="Email:" />
+                <p:inputText id="email_rec" value="#{seguridadBean.email}" required="true" />
+                <p:message for="email_rec" />
+            </h:panelGrid>
+            <p:commandButton value="Recuperar Constrasena" action="#{seguridadBean.iniciarSesion}"
+                             styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+            <p:growl for="rec-bean" showDetail="true" />
+        </h:form>
+    </p:dialog>
+
+
 
 
 

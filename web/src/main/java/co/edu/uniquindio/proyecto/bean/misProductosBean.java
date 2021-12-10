@@ -38,4 +38,15 @@ public class misProductosBean implements Serializable {
         }
 
     }
+
+    public void eliminarProducto(Integer id){
+        try {
+            productoServicio.eliminarProducto(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public String irADetalle(String id){
+        return "/detalleProducto?faces-redirect=true&amp;producto="+id;
+    }
 }

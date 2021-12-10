@@ -28,7 +28,8 @@ public interface AdministradorRepo extends JpaRepository <Administrador, Integer
     //}
 
     //Loguearse
-    Optional<Administrador> findByEmailAndPassword(String email, String clave);
-    Page<Administrador> findAll(Pageable paginador);
+      Optional<Administrador> findByEmailAndPassword(String email, String clave);
+//    Page<Administrador> findAll(Pageable paginador);
+
 
 }

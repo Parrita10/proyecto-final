@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.dto.SendEmail;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
@@ -27,6 +28,9 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Autowired
     private ComentarioRepo comentarioRepo;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private CompraRepo compraRepo;
@@ -145,6 +149,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioPago) throws Exception {
         try {
+
             Compra c = new Compra();
             Producto producto = new Producto();
             c.setFechaCompra(LocalDate.now(ZoneId.of("America/Bogota")));
@@ -155,16 +160,24 @@ public class ProductoServicioImpl implements ProductoServicio {
 
             DetalleCompra dc;
             for (ProductoCarrito p : productos) {
+                producto = productoRepo.findById(p.getId()).get();
                 dc = new DetalleCompra();
                 dc.setCompra(compraGuardada);
                 dc.setPrecioProducto(p.getPrecio());
                 dc.setUnidades(p.getUnidades());
-                dc.setProducto(productoRepo.findById(p.getId()).get());
-                producto = productoRepo.findById(p.getId()).get();
+                dc.setProducto(producto);
+
                 producto.setUnidades(producto.getUnidades()-p.getUnidades());
 
                 detalleCompraRepo.save(dc);
             }
+            SendEmail sendEmail = new SendEmail();
+            sendEmail.setToEmail(usuario.getEmail());
+            sendEmail.setSubject("Detalle compra");
+            sendEmail.setBody("body");
+            sendEmail.setFrom("migue.2556242@gmail.com");
+
+            System.out.println(emailService.sendEmail(sendEmail));
             return compraGuardada;
         }catch (Exception e){
             throw new Exception(e.getMessage());

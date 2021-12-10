@@ -36,14 +36,14 @@ public class Ciudad implements Serializable {
 
 
     //Aplicamos la relacion uno a muchos entre Ciudad y usuarios
-    @OneToMany(mappedBy = "ciudad")
+    @OneToMany(mappedBy = "ciudad",cascade = CascadeType.REMOVE)
     //Lo exluye del metodo toString
     @ToString.Exclude
     private List<Usuario> usuarios;
 
 
     //Aplicamos la relacion uno a muchos entre Ciudad y Productos
-    @OneToMany(mappedBy = "ciudad")
+    @OneToMany(mappedBy = "ciudad" ,cascade = CascadeType.REMOVE)
     //Lo exluye del metodo toString
     @ToString.Exclude
     private List<Producto> productos;

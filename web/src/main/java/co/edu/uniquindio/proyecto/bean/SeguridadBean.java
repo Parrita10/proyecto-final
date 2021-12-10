@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.entidades.Administrador;
 import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.servicios.AdminServicio;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 public class SeguridadBean implements Serializable {
 
     @Getter @Setter
-    private boolean autenticado;
+    private boolean autenticado, autenticadoAdmin;
 
     @Getter @Setter
     private String email,password;
@@ -34,12 +36,18 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private Usuario usuarioSesion;
 
+    @Getter @Setter
+    private Administrador administradorSesion;
+
 
     @Setter @Getter
     private String medioPago ;
 
     @Autowired
     private ProductoServicio productoServicio;
+
+    @Autowired
+    private AdminServicio adminServicio;
 
     @Getter @Setter
     private ArrayList<ProductoCarrito> productosCarrito;
@@ -70,6 +78,19 @@ public class SeguridadBean implements Serializable {
         }
         return null;
 
+    }
+    public String iniciarSesionAdmin(){
+        if(!email.isEmpty() && !password.isEmpty()){
+            try {
+                administradorSesion= adminServicio.logInAdmin(email,password);
+                autenticadoAdmin= true;
+                return "/index?faces-redirect=true";
+            }catch (Exception e){
+                FacesMessage fm=new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("login-admin",fm);
+            }
+        }
+        return null;
     }
 
     public String cerrarSesion(){
@@ -127,6 +148,26 @@ public class SeguridadBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage("compra-msj",fm);
             }
         }
+    }
+
+    public boolean mostrarLog(){
+        if(!autenticadoAdmin&&!autenticado){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void recuperarContrasena(){
+        if(email!=null){
+            try {
+                usuarioServicio.recuperarContrasena(usuarioServicio.obtenerPorEmail(email));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
 }

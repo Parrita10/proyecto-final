@@ -41,7 +41,7 @@ public class Subasta implements Serializable {
     private Producto producto;
 
     //Aplicamos la relacion uno a muchos entre SubastaUsuario y Subasta
-    @OneToMany(mappedBy = "subasta")
+    @OneToMany(mappedBy = "subasta",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
 

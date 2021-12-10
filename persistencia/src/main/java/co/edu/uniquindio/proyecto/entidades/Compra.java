@@ -41,7 +41,7 @@ public class Compra implements Serializable {
     private Usuario usuario;
 
     //Aplicamos la relacion uno a muchos entre Comentario y DetalleCompra
-    @OneToMany(mappedBy = "compra")
+    @OneToMany(mappedBy = "compra",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<DetalleCompra> detallesCompras;
 

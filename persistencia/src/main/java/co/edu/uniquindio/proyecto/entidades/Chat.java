@@ -29,7 +29,7 @@ public class Chat implements Serializable {
 
 
     //Aplicamos la relacion uno a muchos entre chat y mensajes
-    @OneToMany(mappedBy = "chat")
+    @OneToMany(mappedBy = "chat",cascade = CascadeType.REMOVE)
     //Lo exluye del metodo toString
     @ToString.Exclude
     private List<Mensaje> mensajes;

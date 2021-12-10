@@ -159,6 +159,9 @@
 .btn-white{
     color: black !important;
 }
+.ui-button-raised{
+    margin: 100px;
+}
 
 #lista-com_content{
     border: none;

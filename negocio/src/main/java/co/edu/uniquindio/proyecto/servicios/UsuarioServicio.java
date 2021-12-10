@@ -21,6 +21,10 @@ public interface UsuarioServicio {
 
     Usuario login(String email, String password) throws Exception;
 
+    Usuario obtenerPorEmail(String email) throws Exception;
+
+    void recuperarContrasena(Usuario usuario);
+
 }
 
 

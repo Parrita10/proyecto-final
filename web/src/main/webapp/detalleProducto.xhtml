@@ -39,7 +39,7 @@
                         <h4 class="mt-4">Descuento: #{detalleProductoBean.producto.descuento}</h4>
                         <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
                             <h5 class="p-mt-0">Anadir a favoritos</h5>
-                            <p:toggleSwitch value=""/>
+                            <p:toggleSwitch />
                         </h:form>
 
 
@@ -51,7 +51,7 @@
                     </div>
                     <div class="box">
                         <p:panel header="Ciudad" styleClass="mt-4">
-                            <h:outputText value="#{detalleProductoBean.producto.ciudad}" escape="false"/>
+                            <h:outputText value="#{detalleProductoBean.producto.ciudad.nombre}" escape="false"/>
                         </p:panel>
                     </div>
 

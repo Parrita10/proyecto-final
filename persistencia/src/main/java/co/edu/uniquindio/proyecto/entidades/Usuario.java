@@ -42,19 +42,19 @@ public class Usuario extends Persona implements Serializable {
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Compra
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Compra> compras;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Comentario
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comentario> comentarios;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y SubastaUsuario
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
 
@@ -62,20 +62,20 @@ public class Usuario extends Persona implements Serializable {
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
 
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH})
     @ToString.Exclude
     private List<Producto> productosFavoritos;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Producto
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Producto> productos;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Chat
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Chat> chats;
 

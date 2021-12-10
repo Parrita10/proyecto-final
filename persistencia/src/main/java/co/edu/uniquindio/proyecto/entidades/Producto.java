@@ -88,22 +88,22 @@ public class Producto implements Serializable {
     private Usuario usuario;
 
     //Aplicamos la relacion uno a muchos entre Producto y DetalleCompra
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto" ,cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
 
     //Aplicamos la relacion uno a muchos entre Comentario y Producto
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto" ,cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comentario> comentarios;
 
     //Aplicamos la relacion uno a muchos entre Producto y Subasta
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Subasta> subastas;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
-    @ManyToMany(mappedBy = "productosFavoritos")
+    @ManyToMany(mappedBy = "productosFavoritos",cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH})
     @ToString.Exclude
     private List<Usuario> usuarios;
 
