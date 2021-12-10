@@ -48,6 +48,11 @@
                                              action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.codigo, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre, detalleProductoBean.producto.imagenPrincipal)}"/>
                             <p:growl for="add-cart" showDetail="true"/>
                         </h:form>
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
+                            <p:commandButton  action="principal?faces-redirect=true" value="Contactar Vendedor" icon="pi pi-envelope" update="@form"
+                            />
+
+                        </h:form>
                     </div>
                     <div class="box">
                         <p:panel header="Ciudad" styleClass="mt-4">

@@ -111,28 +111,28 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     }
 
-//    @Override
-//    public void recuperarContrasena(Usuario usuario) {
-//
-//        SendEmail sendEmail = new SendEmail();
-//        sendEmail.setToEmail(usuario.getEmail());
-//        sendEmail.setSubject("Detalle compra");
-//        sendEmail.setBody("<!DOCTYPE html>\n" +
-//                    "<html lang=\"en\">\n" +
-//                    "<head>\n" +
-//                    "    <meta charset=\"UTF-8\">\n" +
-//                    "<title> Recuperacion de contrasena </ title>\n" +
-//                    "</head>\n" +
-//                    "<body>\n" +
-//                    "<h2> Ingrese al siguiente enlace para recuperar la contrasena </ h2> \n" +
-//                    "<A HREF="http://localhost:8080/admin/gestionUsuarios.xhtml">Enlace</A>\n" +
-//                    "</body>\n" +
-//                    "</html>");
-//        sendEmail.setFrom("migue.2556242@gmail.com");
-//
-//        System.out.println(emailService.sendEmail(sendEmail));
-//
-//    }
+    @Override
+    public void recuperarContrasena(Usuario usuario) {
+
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.setToEmail(usuario.getEmail());
+        sendEmail.setSubject("Detalle compra");
+        sendEmail.setBody("<!DOCTYPE html>\n" +
+                    "<html lang=\"en\">\n" +
+                    "<head>\n" +
+                    "    <meta charset=\"UTF-8\">\n" +
+                    "<title> Recuperacion de contrasena </ title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "<h2> Ingrese al siguiente enlace para recuperar la contrasena </ h2> \n" +
+                    "<a href=\"http://localhost:8080/cambiarContrasena.xhtml?faces-redirect=true&amp;usuario=7777\">Enlace</a>\n" +
+                    "</body>\n" +
+                    "</html>");
+        sendEmail.setFrom("migue.2556242@gmail.com");
+
+        System.out.println(emailService.sendEmail(sendEmail));
+
+    }
 
 
 }

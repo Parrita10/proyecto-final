@@ -81,6 +81,37 @@
                                 Gestion usuarios
                             </a>
                         </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/reportesAdmin.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-chart-line bi d-block mx-auto mb-1 icon-menu"></i>
+                                Reporte 1
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/reportesAdmin2.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-chart-line bi d-block mx-auto mb-1 icon-menu"></i>
+                                Reporte 2
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/reportesAdmin3.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-chart-line bi d-block mx-auto mb-1 icon-menu"></i>
+                                Reporte 3
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/reportesAdmin4.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-chart-line bi d-block mx-auto mb-1 icon-menu"></i>
+                                Reporte 4
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/reportesAdmin5.xhtml" class="nav-link text-white" >
+                                <i class="pi pi-chart-line bi d-block mx-auto mb-1 icon-menu"></i>
+                                Reporte 5
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -101,6 +132,12 @@
                                          action="registrarUsuario?faces-redirect=true" icon="pi pi-user-plus"/>
 
                     </h:form>
+                    <div jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                    <h:form>
+                        <p:commandButton value="Cerrar sesion" styleClass="btn btn-primary" action="#{seguridadBean.cerrarSesion}"/>
+
+                    </h:form>
+                    </div>
                     <div jsf:rendered="#{seguridadBean.autenticado}" id="info-sesion">
                         <span>Hola, #{seguridadBean.usuarioSesion.nombre}</span>
                         <h:form>
@@ -150,7 +187,7 @@
                 <p:inputText id="email_rec" value="#{seguridadBean.email}" required="true" />
                 <p:message for="email_rec" />
             </h:panelGrid>
-            <p:commandButton value="Recuperar Constrasena" action="#{seguridadBean.iniciarSesion}"
+            <p:commandButton value="Recuperar Constrasena" action="#{seguridadBean.recuperarContrasena}"
                              styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
             <p:growl for="rec-bean" showDetail="true" />
         </h:form>

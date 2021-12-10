@@ -55,6 +55,32 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public List<Producto> listarProductos(Categoria categoria) {
+
+        return productoRepo.listarPorCategoria(categoria);
+    }
+
+    @Override
+    public List<Producto> listarPorCiudad(String nombre) {
+        return productoRepo.listarPorCiudad(nombre);
+    }
+
+    @Override
+    public List<Producto> listarPorDescuento() {
+        return productoRepo.productosConDescuento();
+    }
+
+    @Override
+    public List<Producto> productosMascomentados() {
+        return productoRepo.productosMascomentados();
+    }
+
+    @Override
+    public List<Producto> listarPorRango(Double precio) {
+        return productoRepo.listarRangoPrrecio(precio);
+    }
+
+    @Override
     public void eliminarProducto(Integer codigo) throws Exception {
 
 
@@ -76,12 +102,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         return productoRepo.findById(codigo).orElseThrow( ()-> new Exception("El producto no existe"));
     }
 
-    @Override
-    public List<Producto> listarProductos(Categoria categoria) {
 
-
-        return productoRepo.listarPorCategoria(categoria);
-    }
 
     @Override
     public List<Producto> listarTodosProductos() {
@@ -155,6 +176,8 @@ public class ProductoServicioImpl implements ProductoServicio {
             c.setFechaCompra(LocalDate.now(ZoneId.of("America/Bogota")));
             c.setUsuario(usuario);
             c.setMedioPago(medioPago);
+            String string ="";
+
 
             Compra compraGuardada = compraRepo.save(c);
 
@@ -166,6 +189,9 @@ public class ProductoServicioImpl implements ProductoServicio {
                 dc.setPrecioProducto(p.getPrecio());
                 dc.setUnidades(p.getUnidades());
                 dc.setProducto(producto);
+                string+="Nombre del producto: "+producto.getNombre()+"\n";
+                string+="Precio del producto: "+producto.getPrecio()+"\n";
+                string+="Unidades: "+p.getUnidades()+"\n";
 
                 producto.setUnidades(producto.getUnidades()-p.getUnidades());
 
@@ -174,7 +200,7 @@ public class ProductoServicioImpl implements ProductoServicio {
             SendEmail sendEmail = new SendEmail();
             sendEmail.setToEmail(usuario.getEmail());
             sendEmail.setSubject("Detalle compra");
-            sendEmail.setBody("body");
+            sendEmail.setBody(string);
             sendEmail.setFrom("migue.2556242@gmail.com");
 
             System.out.println(emailService.sendEmail(sendEmail));

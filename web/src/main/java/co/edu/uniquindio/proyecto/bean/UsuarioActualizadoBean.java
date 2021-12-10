@@ -24,7 +24,7 @@ public class UsuarioActualizadoBean implements Serializable {
     @Getter @Setter
     private Usuario usuario;
 
-    @Value("#{param['usuario']}")
+
     private String usuarioId;
 
     @Autowired
@@ -39,6 +39,7 @@ public class UsuarioActualizadoBean implements Serializable {
     @PostConstruct
     public void inicializar(){
         try {
+            usuarioId="7777";
             usuario= usuarioServicio.obtenerUsuario(usuarioId);
             ciudades= ciudadServicio.listarCiudades();
         } catch (Exception e) {

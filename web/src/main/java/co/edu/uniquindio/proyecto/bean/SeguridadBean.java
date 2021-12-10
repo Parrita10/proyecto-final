@@ -162,8 +162,11 @@ public class SeguridadBean implements Serializable {
         if(email!=null){
             try {
                 usuarioServicio.recuperarContrasena(usuarioServicio.obtenerPorEmail(email));
+                FacesMessage fm=new FacesMessage(FacesMessage.SEVERITY_INFO,"Alerta","El correo de recuperacion se envio correctamente");
+                FacesContext.getCurrentInstance().addMessage("rec-bean",fm);
             } catch (Exception e) {
-                e.printStackTrace();
+                FacesMessage fm=new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alerta",e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("rec-bean",fm);
             }
 
         }

@@ -75,8 +75,22 @@ public interface ProductoRepo extends JpaRepository <Producto, Integer> {
     @Query("select  avg(c.calificacion) from Producto p join p.comentarios c where p.codigo = :codigo")
     Integer obtenerPromedioCalificaciones(Integer codigo);
 
-    @Query("select p from Producto p where :categoria member of p.categorias" )
+
+
+    @Query("select p from Producto p where :categoria  member of p.categorias")
     List<Producto> listarPorCategoria(Categoria categoria);
+
+    @Query("select p from Producto p where p.ciudad.nombre like concat('%', :nombre, '%') ")
+    List<Producto> listarPorCiudad(String nombre);
+
+    @Query("select p from Producto p where :precio < p.precio")
+    List<Producto> listarRangoPrrecio(Double precio);
+
+    @Query("select p from Producto p where p.descuento > 0")
+    List<Producto> productosConDescuento();
+
+    @Query("select p from Producto p where p.comentarios.size < 5 ")
+    List<Producto> productosMascomentados();
 
 
 //    Falta hacerle el test

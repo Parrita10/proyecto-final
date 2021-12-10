@@ -17,6 +17,12 @@ import java.util.List;
 
 public interface ProductoServicio {
 
+    List<Producto> listarPorCiudad(String nombre);
+
+    List<Producto> listarPorDescuento();
+    List<Producto> productosMascomentados();
+    List<Producto> listarPorRango(Double precio);
+
     Producto publicarProducto(Producto p) throws Exception;
 
     void actualizarProducto(Producto producto)throws Exception;
@@ -34,7 +40,7 @@ public interface ProductoServicio {
 
 
 
-    List<Producto> listarProductos(Categoria categoria);
+    List<Producto> listarProductos(Categoria categoria) throws Exception;
 
     void comentarProducto(String mensaje, Integer calificacion, Usuario usuario, Producto producto) throws Exception;
 

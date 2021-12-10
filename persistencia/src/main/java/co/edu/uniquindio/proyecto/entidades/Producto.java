@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -83,26 +84,30 @@ public class Producto implements Serializable {
     private Ciudad ciudad;
 
     //Aplicamos la relacion muchos a uno entre Producto y Usuario
+    @JsonIgnore
     @ManyToOne
-
     private Usuario usuario;
 
     //Aplicamos la relacion uno a muchos entre Producto y DetalleCompra
+    @JsonIgnore
     @OneToMany(mappedBy = "producto" ,cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<DetalleCompra> detalleCompras;
 
     //Aplicamos la relacion uno a muchos entre Comentario y Producto
+    @JsonIgnore
     @OneToMany(mappedBy = "producto" ,cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comentario> comentarios;
 
     //Aplicamos la relacion uno a muchos entre Producto y Subasta
+    @JsonIgnore
     @OneToMany(mappedBy = "producto",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Subasta> subastas;
 
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
+    @JsonIgnore
     @ManyToMany(mappedBy = "productosFavoritos",cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH})
     @ToString.Exclude
     private List<Usuario> usuarios;

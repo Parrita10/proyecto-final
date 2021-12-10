@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -42,18 +43,21 @@ public class Usuario extends Persona implements Serializable {
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Compra
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Compra> compras;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Comentario
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comentario> comentarios;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y SubastaUsuario
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<SubastaUsuario> subastaUsuarios;
@@ -61,20 +65,21 @@ public class Usuario extends Persona implements Serializable {
 
     //Aplicamos la relacion muchos a muchos entre Producto y Usuario
 
-
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH, CascadeType.MERGE,CascadeType.REFRESH})
     @ToString.Exclude
     private List<Producto> productosFavoritos;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Producto
-
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Producto> productos;
 
 
     //Aplicamos la relacion uno a muchos entre Usuario y Chat
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Chat> chats;
